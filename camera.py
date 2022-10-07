@@ -42,5 +42,11 @@ def get_camera_info_windows() -> list:
         yield values
 
 
+def list_cameras_windows() -> list:
+    info = get_camera_info_windows()
+    for camera in info:
+        yield camera.get('Name')
+
+
 if __name__ == '__main__':
-    print(list(list_cameras_darwin()))
+    print(list(list_cameras_windows()))
