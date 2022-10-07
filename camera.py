@@ -25,7 +25,21 @@ def get_camera_info_windows() -> list:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     ).communicate()
-    return list(filter(None, output.decode(encoding='UTF-8').splitlines()))  # Filter empty spaces in the list
+    output = list(filter(None, output.decode(encoding='UTF-8').splitlines()))  # Filter empty spaces in the list
+
+    # Split indices at the required value where the list as to be split and rebuilt as a new one
+    split_indices = [index + 1 for index, val in enumerate(output) if val.startswith('SystemName')]
+
+    # Rebuild the new list split at the given index value
+    split_list = [output[i: j] for i, j in
+                  zip([0] + split_indices,
+                      split_indices + ([len(output)] if split_indices[-1] != len(output) else []))]
+
+    for list_ in split_list:
+        values = {}
+        for sub_list in list_:
+            values[sub_list.split('=')[0]] = sub_list.split('=')[1]
+        yield values
 
 
 if __name__ == '__main__':
