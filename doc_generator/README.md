@@ -8,11 +8,6 @@
 # Camera
 Get camera information along with the names for `macOS` and `Windows`
 
-### Runbook
-[![made-with-sphinx-doc](https://img.shields.io/badge/Code%20Docs-Sphinx-1f425f.svg)](https://www.sphinx-doc.org/en/master/man/sphinx-autogen.html)
-
-[https://thevickypedia.github.io/camera/](https://thevickypedia.github.io/camera/)
-
 ## License & copyright
 
 &copy; Vignesh Sivanandha Rao

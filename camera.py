@@ -1,25 +1,31 @@
 import subprocess
 from typing import Dict, List
 
-from modules.config import system, settings
-from modules.constants import Windows, Darwin
+from modules.config import settings, system
+from modules.constants import Darwin, Windows
 from modules.exceptions import CameraError, UnsupportedOS
 
 
 def list_splitter(original_list: List[str], delimiter: str) -> List[List[str]]:
     """Splits a list into multiple lists at a specific value given.
 
+    Args:
+        original_list: List that has to be split.
+        delimiter: Value where the list has to be split.
+
     Notes:
         delimiter: This value should be final value where the initial list must be split.
 
     Examples:
-        main_list = ['First Name', 'Vignesh', 'Last Name': 'Rao', 'Drives': 'Jaguar',
-                     'First Name', 'Tony', 'Last Name': 'Stark', 'Drives': 'Mark III']
-        delimiter should be 'Drives' since that's where the main list has to be split.
+        .. code-block:: python
 
-    Args:
-        original_list: List that has to be split.
-        delimiter: Value where the list has to be split.
+            input_list = ['First Name', 'Vignesh', 'Last Name': 'Rao', 'Drives': 'Jaguar',
+                'First Name', 'Tony', 'Last Name': 'Stark', 'Drives': 'Mark III']
+
+            >> [['First Name', 'Vignesh', 'Last Name': 'Rao', 'Drives': 'Jaguar'],
+                ['First Name', 'Tony', 'Last Name': 'Stark', 'Drives': 'Mark III']]
+
+        delimiter should be ``Drives`` since that's where the main list has to be split.
 
     Returns:
         List[List[str]]:

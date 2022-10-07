@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Welcome to Camera’s documentation! &#8212; Camera  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Camera" href="README.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="Camera"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Camera  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to Camera’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-camera-s-documentation">
+<h1>Welcome to Camera’s documentation!<a class="headerlink" href="#welcome-to-camera-s-documentation" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Read Me:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">Camera</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#license-copyright">License &amp; copyright</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-camera">
+<span id="camera"></span><h1>Camera<a class="headerlink" href="#module-camera" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="camera.Camera">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">camera.</span></span><span class="sig-name descname"><span class="pre">Camera</span></span><a class="headerlink" href="#camera.Camera" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initiates camera object to get information about the connected cameras.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Camera</span>
+</pre></div>
+</div>
+<p>Instantiates the camera object to run the OS specific builtin commands to get the camera information.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="camera.Camera.get_camera_info">
+<span class="sig-name descname"><span class="pre">get_camera_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#camera.Camera.get_camera_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the yielded camera information as a generator object and returns as a list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of dictionaries.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="camera.Camera.list_cameras">
+<span class="sig-name descname"><span class="pre">list_cameras</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#camera.Camera.list_cameras" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of names of all cameras connected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of camera names.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="camera.list_splitter">
+<span class="sig-prename descclassname"><span class="pre">camera.</span></span><span class="sig-name descname"><span class="pre">list_splitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#camera.list_splitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits a list into multiple lists at a specific value given.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>original_list</strong> – List that has to be split.</p></li>
+<li><p><strong>delimiter</strong> – Value where the list has to be split.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>delimiter: This value should be final value where the initial list must be split.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">input_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;First Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Vignesh&#39;</span><span class="p">,</span> <span class="s1">&#39;Last Name&#39;</span><span class="p">:</span> <span class="s1">&#39;Rao&#39;</span><span class="p">,</span> <span class="s1">&#39;Drives&#39;</span><span class="p">:</span> <span class="s1">&#39;Jaguar&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;First Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Tony&#39;</span><span class="p">,</span> <span class="s1">&#39;Last Name&#39;</span><span class="p">:</span> <span class="s1">&#39;Stark&#39;</span><span class="p">,</span> <span class="s1">&#39;Drives&#39;</span><span class="p">:</span> <span class="s1">&#39;Mark III&#39;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;</span> <span class="p">[[</span><span class="s1">&#39;First Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Vignesh&#39;</span><span class="p">,</span> <span class="s1">&#39;Last Name&#39;</span><span class="p">:</span> <span class="s1">&#39;Rao&#39;</span><span class="p">,</span> <span class="s1">&#39;Drives&#39;</span><span class="p">:</span> <span class="s1">&#39;Jaguar&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;First Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Tony&#39;</span><span class="p">,</span> <span class="s1">&#39;Last Name&#39;</span><span class="p">:</span> <span class="s1">&#39;Stark&#39;</span><span class="p">,</span> <span class="s1">&#39;Drives&#39;</span><span class="p">:</span> <span class="s1">&#39;Mark III&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>delimiter should be <code class="docutils literal notranslate"><span class="pre">Drives</span></code> since that’s where the main list has to be split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns list of list(s).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[List[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-modules.config">
+<span id="config"></span><h1>Config<a class="headerlink" href="#module-modules.config" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.config.Settings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.config.</span></span><span class="sig-name descname"><span class="pre">Settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.config.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Settings used by camera.py.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Settings</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.config.Settings.darwin">
+<span class="sig-name descname"><span class="pre">darwin</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Darwin'</span></em><a class="headerlink" href="#modules.config.Settings.darwin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.config.Settings.windows">
+<span class="sig-name descname"><span class="pre">windows</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Windows'</span></em><a class="headerlink" href="#modules.config.Settings.windows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modules.config.settings">
+<span class="sig-prename descclassname"><span class="pre">modules.config.</span></span><span class="sig-name descname"><span class="pre">settings</span></span><a class="headerlink" href="#modules.config.settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#modules.config.Settings" title="modules.config.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">Settings</span></code></a></p>
+</dd></dl>
+
+</section>
+<section id="module-modules.constants">
+<span id="constants"></span><h1>Constants<a class="headerlink" href="#module-modules.constants" title="Permalink to this heading">¶</a></h1>
+<p>Generates constants for use in camera.py.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Constants</span>
+</pre></div>
+</div>
+</section>
+<section id="module-modules.exceptions">
+<span id="exceptions"></span><h1>Exceptions<a class="headerlink" href="#module-modules.exceptions" title="Permalink to this heading">¶</a></h1>
+<p>This is a space for custom exceptions and errors masking defaults with meaningful names.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Exceptions</span>
+</pre></div>
+</div>
+<dl class="py exception">
+<dt class="sig sig-object py" id="modules.exceptions.CameraError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.exceptions.</span></span><span class="sig-name descname"><span class="pre">CameraError</span></span><a class="headerlink" href="#modules.exceptions.CameraError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom <code class="docutils literal notranslate"><span class="pre">SystemError</span></code> to indicate problems in describing connected video devices.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CameraError</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modules.exceptions.UnsupportedOS">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnsupportedOS</span></span><a class="headerlink" href="#modules.exceptions.UnsupportedOS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom <code class="docutils literal notranslate"><span class="pre">OSError</span></code> raised when initiated in an unsupported operating system.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">UnsupportedOS</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Welcome to Camera’s documentation!</a></li>
+<li><a class="reference internal" href="#module-camera">Camera</a><ul>
+<li><a class="reference internal" href="#camera.Camera"><code class="docutils literal notranslate"><span class="pre">Camera</span></code></a><ul>
+<li><a class="reference internal" href="#camera.Camera.get_camera_info"><code class="docutils literal notranslate"><span class="pre">Camera.get_camera_info()</span></code></a></li>
+<li><a class="reference internal" href="#camera.Camera.list_cameras"><code class="docutils literal notranslate"><span class="pre">Camera.list_cameras()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#camera.list_splitter"><code class="docutils literal notranslate"><span class="pre">list_splitter()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modules.config">Config</a><ul>
+<li><a class="reference internal" href="#modules.config.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a><ul>
+<li><a class="reference internal" href="#modules.config.Settings.darwin"><code class="docutils literal notranslate"><span class="pre">Settings.darwin</span></code></a></li>
+<li><a class="reference internal" href="#modules.config.Settings.windows"><code class="docutils literal notranslate"><span class="pre">Settings.windows</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modules.config.settings"><code class="docutils literal notranslate"><span class="pre">settings</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modules.constants">Constants</a></li>
+<li><a class="reference internal" href="#module-modules.exceptions">Exceptions</a><ul>
+<li><a class="reference internal" href="#modules.exceptions.CameraError"><code class="docutils literal notranslate"><span class="pre">CameraError</span></code></a></li>
+<li><a class="reference internal" href="#modules.exceptions.UnsupportedOS"><code class="docutils literal notranslate"><span class="pre">UnsupportedOS</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="README.html"
+                          title="next chapter">Camera</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="Camera"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Camera  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to Camera’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, Vignesh Sivanandha Rao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.3.
+    </div>
+  </body>
+</html>

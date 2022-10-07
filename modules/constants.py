@@ -1,5 +1,5 @@
 # noinspection PyUnresolvedReferences
-"""Generates constants for use in camera.py
+"""Generates constants for use in camera.py.
 
 >>> Constants
 
