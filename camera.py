@@ -1,15 +1,37 @@
-import json
 import subprocess
 from typing import Dict, List
-from xml.etree import ElementTree
-import platform
 
-import xmltodict
+from modules.config import system, settings
+from modules.constants import Windows, Darwin
+from modules.exceptions import CameraError, UnsupportedOS
 
-SYSTEM = platform.system()
 
-Win32 = """wmic path CIM_LogicalDevice where "Description like 'USB Video%'" get /value"""
-MacOS = "system_profiler -xml SPCameraDataType"
+def list_splitter(original_list: List[str], delimiter: str) -> List[List[str]]:
+    """Splits a list into multiple lists at a specific value given.
+
+    Notes:
+        delimiter: This value should be final value where the initial list must be split.
+
+    Examples:
+        main_list = ['First Name', 'Vignesh', 'Last Name': 'Rao', 'Drives': 'Jaguar',
+                     'First Name', 'Tony', 'Last Name': 'Stark', 'Drives': 'Mark III']
+        delimiter should be 'Drives' since that's where the main list has to be split.
+
+    Args:
+        original_list: List that has to be split.
+        delimiter: Value where the list has to be split.
+
+    Returns:
+        List[List[str]]:
+        Returns list of list(s).
+    """
+    # Split indices at the required value where the list as to be split and rebuilt as a new one
+    split_indices = [index + 1 for index, val in enumerate(original_list) if val.startswith(delimiter)]
+
+    # Rebuild the new list split at the given index value
+    return [original_list[i: j] for i, j in
+            zip([0] + split_indices,
+                split_indices + ([len(original_list)] if split_indices[-1] != len(original_list) else []))]
 
 
 class Camera:
@@ -21,10 +43,12 @@ class Camera:
 
     def __init__(self):
         """Instantiates the camera object to run the OS specific builtin commands to get the camera information."""
-        if SYSTEM == 'Darwin':
-            cmd = MacOS
+        if system == settings.darwin:
+            cmd = Darwin
+        elif system == settings.windows:
+            cmd = Windows
         else:
-            cmd = Win32
+            raise UnsupportedOS(f"`{system}` is currently not supported.")
 
         self.output, err = subprocess.Popen(
             cmd,
@@ -33,9 +57,9 @@ class Camera:
             stderr=subprocess.PIPE,
         ).communicate()
         if error := err.decode(encoding='UTF-8'):
-            raise SystemError(error)
+            raise CameraError(error)
 
-    def get_camera_info_windows(self) -> List[Dict[str, str]]:
+    def _get_camera_info_windows(self) -> List[Dict[str, str]]:
         """Get camera information for WindowsOS.
 
         Yields:
@@ -47,57 +71,73 @@ class Camera:
         if not output:
             return
 
-        # Split indices at the required value where the list as to be split and rebuilt as a new one
-        split_indices = [index + 1 for index, val in enumerate(output) if val.startswith('SystemName')]
-
-        # Rebuild the new list split at the given index value
-        split_list = [output[i: j] for i, j in
-                      zip([0] + split_indices,
-                          split_indices + ([len(output)] if split_indices[-1] != len(output) else []))]
-
-        for list_ in split_list:
+        for list_ in list_splitter(original_list=output, delimiter='SystemName'):
             values = {}
             for sub_list in list_:
                 values[sub_list.split('=')[0]] = sub_list.split('=')[1]
             yield values
 
-    def list_cameras_windows(self) -> List[str]:
+    def _list_cameras_windows(self) -> List[str]:
         """Yields the camera name for WindowsOS.
 
         Yields:
             Names of the connected cameras.
         """
-        info = self.get_camera_info_windows()
-        for camera in info:
+        for camera in self._get_camera_info_windows():
             yield camera.get('Name')
 
-    def get_camera_info_darwin(self) -> Dict[str, Dict]:
+    def _get_camera_info_darwin(self) -> List[Dict[str, str]]:
         """Get camera information for macOS.
 
         Returns:
             Dict[str, Dict]:
             Returns the raw XML output as a dictionary.
         """
-        ordered_dict = xmltodict.parse(self.output.decode())
-        stringify = json.dumps(ordered_dict)
-        return json.loads(stringify)
+        output = list(filter(None, self.output.decode(encoding='UTF-8').splitlines()))
+        if not output:
+            return
+        output = [v.strip() for v in output][1:]
 
-    def list_cameras_darwin(self) -> List[str]:
+        # # Return output as dictionary of dictionaries
+        # dict_ = {output[0]: {}}
+        # new_list = output[1:]
+        # new_dict = {}
+        # for o in new_list:
+        #     if o.endswith(':'):
+        #         dict_[output[0]][o.rstrip(':')] = new_dict
+        #     else:
+        #         new_dict[o.split(':')[0].strip()] = o.split(':')[1].strip()
+        # return dict_
+
+        for list_ in list_splitter(original_list=output, delimiter='Unique ID'):
+            values = {}
+            for sub_list in list_:
+                if sub_list.endswith(':'):
+                    values['Name'] = sub_list.rstrip(':')
+                else:
+                    values[sub_list.split(':')[0]] = sub_list.split(':')[1]
+            yield values
+
+    def _list_cameras_darwin(self) -> List[str]:
         """Yields the camera name for macOS.
 
         Yields:
             List[str]:
             Names of the connected cameras.
         """
-        last_text = None
-        try:
-            parsed = ElementTree.fromstring(self.output).iterfind("./array/dict/array/dict/*")
-        except ElementTree.ParseError:
-            return
-        for node in parsed:
-            if last_text == "_name":
-                yield node.text
-            last_text = node.text
+        for camera in self._get_camera_info_darwin():
+            yield camera.get('Name')
+
+    def get_camera_info(self) -> List[Dict[str, str]]:
+        """Gets the yielded camera information as a generator object and returns as a list.
+
+        Returns:
+            List[Dict[str]]:
+            List of dictionaries.
+        """
+        if system == settings.darwin:
+            return list(self._get_camera_info_darwin())
+        return list(self._get_camera_info_windows())
 
     def list_cameras(self) -> List[str]:
         """List of names of all cameras connected.
@@ -106,10 +146,10 @@ class Camera:
             List[str]:
             List of camera names.
         """
-        if SYSTEM == 'Darwin':
-            return list(self.list_cameras_darwin())
-        return list(self.list_cameras_windows())
+        if system == settings.darwin:
+            return list(self._list_cameras_darwin())
+        return list(self._list_cameras_windows())
 
 
 if __name__ == '__main__':
-    print(Camera().list_cameras())
+    print(Camera().get_camera_info())
